@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Accounts</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">
+                <h1>
+                    Accounts
+                </h1>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <input type="file" name="file" required/>
+                  <input type="submit" value="Upload File" />
+                </form>
+                <br>
+                <div>
+                    <table>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Balance
+                            </th>
+                        </tr>
+                        {% for account in accounts %}
+                            <tr class="clickable-row">
+                                <td>
+                                    <a href="{{account.id}}/">
+                                        {{ account.id }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{account.id}}/">
+                                        {{ account.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{account.id}}/">
+                                        {{ account.balance }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+    <style>
+        .content {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center; /* Horizontal centering */
+            align-items: center;    /* Vertical centering */
+            height: 100%;
+        }
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        tr:nth-child(even) {
+          background-color: #D6EEEE;
+        }
+        td {
+            text-align: center;
+            padding: 10px;
+        }
+        .clickable-row {
+            cursor: pointer;
+        }
+        a:link {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+        a:visited {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+        a:hover {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+        a:active {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+    </style>
+</html>

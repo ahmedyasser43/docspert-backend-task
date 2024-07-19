@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Account Details</title>
+    </head>
+    <body>
+        <div class="account-header">
+        <h1>
+            User name: {{ account.name }}
+        </h1>
+        <h3>
+            Balance: {{ account.balance }}
+        </h3>
+    </div>
+        <hr>
+        <div class="container">
+            <div class="content">
+                <div class="transfer-form">
+                    <h3>Transfer To Account</h3>
+                    <form action="{{account.id}}" method="POST">
+                    {% csrf_token %}
+                    <label for="receiver">Receiver Account: </label>
+                    <select name="receiverAccount" id="receiver" required>
+                        {% for receiverAccount in selection_accounts %}
+                            {% if account.id != receiverAccount.id %}
+                                <option value="{{ receiverAccount.id }}">{{ receiverAccount.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select> <br> <br>
+                    <label for="amount">Amount: </label>
+                    <input type="number" id="amount" name="amount" min="0" step="any" required>
+                    <br>
+                    <input class="transfer-btn" type="submit" value="Transfer Money"/>
+                </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <style>
+        .content {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center; /* Horizontal centering */
+            height: 100%;
+        }
+        label{
+            font-weight: bold;
+        }
+        .account-header{
+            background-color: #D6EEEE;
+            text-align: center;
+        }
+        .transfer-form{
+            background-color: #d3d3d3;
+            text-align: center;
+            padding: 10px;
+            margin: 30px;
+        }
+        .transfer-btn{
+            margin: 20px
+        }
+    </style>
+</html>
